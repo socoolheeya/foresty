@@ -1,6 +1,6 @@
 package com.foresty.api.user
 
-import com.foresty.domain.entities.user.User
+import com.foresty.domain.entities.user.domain.User
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.DeleteMapping
