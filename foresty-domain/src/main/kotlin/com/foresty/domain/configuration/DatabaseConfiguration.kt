@@ -18,4 +18,8 @@ class DatabaseConfiguration {
     fun databaseConfig() = DatabaseConfig {
         useNestedTransactions = true
     }
+
+//    fun user(): User {
+//        return User.Companion.
+//    }
 }
