@@ -1,6 +1,7 @@
-package com.foresty.domain.entities.user
+package com.foresty.domain.entities.user.tables
 
 import org.jetbrains.exposed.dao.id.LongIdTable
+
 
 object Users: LongIdTable(name = "user") {
     val name = varchar(name = "name", length = 255)

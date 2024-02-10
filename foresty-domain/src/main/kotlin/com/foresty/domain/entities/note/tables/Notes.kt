@@ -1,6 +1,6 @@
-package com.foresty.domain.entities.note
+package com.foresty.domain.entities.note.tables
 
-import com.foresty.domain.entities.user.Users
+import com.foresty.domain.entities.user.tables.Users
 import com.foresty.domain.enums.NoteEnum
 import org.jetbrains.exposed.dao.id.LongIdTable
 import org.jetbrains.exposed.sql.Column
