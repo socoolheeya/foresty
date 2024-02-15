@@ -1,17 +1,21 @@
 package com.foresty.domain.entities.user.domain
 
-import com.foresty.domain.entities.user.tables.Users
-import lombok.ToString
-import org.jetbrains.exposed.dao.LongEntity
-import org.jetbrains.exposed.dao.LongEntityClass
-import org.jetbrains.exposed.dao.id.EntityID
-import org.springframework.stereotype.Repository
+import com.foresty.domain.entities.user.dao.UserDao
 
-@ToString
-@Repository
-class User(id: EntityID<Long>): LongEntity(id) {
-    companion object: LongEntityClass<User>(Users)
-    var name by Users.name
-    var password by Users.password
-    var email by Users.email
+data class User(
+    val id: Long,
+    val name: String,
+    val password: String,
+    val email: String
+) {
+    companion object {
+        fun toDao(user: User): UserDao {
+            return UserDao.new {
+                name =  user.name
+                password = user.password
+                email = user.email
+            }
+        }
+    }
 }
+

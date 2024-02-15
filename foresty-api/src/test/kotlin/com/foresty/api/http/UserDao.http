@@ -1,0 +1,8 @@
+### get user all
+GET http://localhost:8111/users
+Accept: application/json
+
+
+### get user by id
+GET http://localhost:8111/users/1606
+Accept: application/json
