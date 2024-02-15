@@ -19,7 +19,4 @@ class DatabaseConfiguration {
         useNestedTransactions = true
     }
 
-//    fun user(): User {
-//        return User.Companion.
-//    }
 }

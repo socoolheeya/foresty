@@ -12,8 +12,15 @@ spring:
 logging:
   level:
     root: info
-#    org.hibernate.sql: debug
-#    org.hibernate.type: trace
+    org.jetbrains.exposed: debug
+    org.hibernate.sql: debug
+    org.hibernate.type: trace
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: health, info, beans, conditions
+        include: threaddump, heapdump
 ---
 spring:
   profiles:
@@ -26,6 +33,7 @@ spring:
   exposed:
     generate-ddl: true
     show-sql: true
+base.url: "http://localhost:8111"
 ---
 spring:
   profiles:

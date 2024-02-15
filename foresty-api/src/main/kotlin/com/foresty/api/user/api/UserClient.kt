@@ -1,6 +1,6 @@
-package com.foresty.api.user
+package com.foresty.api.user.api
 
-import com.foresty.domain.entities.user.domain.User
+import com.foresty.domain.entities.user.dao.UserDao
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -20,10 +20,10 @@ interface UserClient {
     fun getAll()
 
     @PostMapping("/users", produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun post(@RequestBody user: User)
+    fun post(@RequestBody user: UserDao)
 
     @PutMapping("/users/email/{email}", produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun put(@PathVariable(name = "email", required = true) email: String, @RequestBody user: User)
+    fun put(@PathVariable(name = "email", required = true) email: String, @RequestBody user: UserDao)
 
     @DeleteMapping("/users/email/{email}", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun delete(@PathVariable(name = "email", required = true) email: String)
