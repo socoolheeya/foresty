@@ -8,8 +8,8 @@ plugins {
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.spring") version "1.9.22"
     kotlin("plugin.jpa") version "1.9.22"
-//    kotlin("plugin.allopen") version "1.9.22"
-//    kotlin("plugin.noarg") version "1.9.22"
+    kotlin("plugin.allopen") version "1.9.22"
+    kotlin("plugin.noarg") version "1.9.22"
 }
 
 tasks.withType<BootJar> {
@@ -33,7 +33,7 @@ subprojects {
         plugin("org.jetbrains.kotlin.jvm")
         plugin("org.jetbrains.kotlin.plugin.spring")
         plugin("org.jetbrains.kotlin.plugin.jpa")
-        //plugin("org.jetbrains.kotlin.plugin.noarg")
+        plugin("org.jetbrains.kotlin.plugin.noarg")
     }
 
     extra["springCloudVersion"] = "2023.0.0"
@@ -45,19 +45,14 @@ subprojects {
 
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-actuator")
-//        implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-validation")
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-//        implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-//        implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         developmentOnly("org.springframework.boot:spring-boot-devtools")
         annotationProcessor("org.projectlombok:lombok")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("io.projectreactor:reactor-test")
-
-//        runtimeOnly("com.h2database:h2")
+        testImplementation("com.ninja-squad:springmockk")
     }
 
     dependencyManagement {
@@ -116,23 +111,23 @@ project("foresty-domain") {
         implementation("org.jetbrains.exposed:exposed-money:$exposedVersion")
         implementation("org.jetbrains.exposed:exposed-spring-boot-starter:$exposedVersion")
         annotationProcessor("org.projectlombok:lombok")
-        //runtimeOnly("com.h2database:h2")
         runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
         //runtimeOnly("org.mariadb:r2dbc-mariadb")
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 
     }
-//    allOpen {
-//        annotation("jakarta.persistence.Entity")
-//        annotation("jakarta.persistence.MappedSuperclass")
-//        annotation("jakarta.persistence.Embeddable")
-//    }
-//
-//    noArg {
-//        annotation("jakarta.persistence.Entity")
-//        annotation("jakarta.persistence.MappedSuperclass")
-//        annotation("jakarta.persistence.Embeddable")
-//    }
+    allOpen {
+        annotation("jakarta.persistence.Entity")
+        annotation("jakarta.persistence.MappedSuperclass")
+        annotation("jakarta.persistence.Embeddable")
+    }
+
+    noArg {
+        annotation("jakarta.persistence.Entity")
+        annotation("jakarta.persistence.MappedSuperclass")
+        annotation("jakarta.persistence.Embeddable")
+    }
 
 
     val bootJar: BootJar by tasks

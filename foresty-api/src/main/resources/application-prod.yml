@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://192.168.12.12:3306/foresty
+    username: root
+    password: 1234
+  exposed:
+    generate-ddl: true
+    show-sql: true

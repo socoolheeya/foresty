@@ -1,6 +1,14 @@
 server:
   port: 8111
+  tomcat:
+    threads:
+      max: 200
+    max-connections: 8192
+    accept-count: 100
+    connection-timeout: 20000
 spring:
+  profiles:
+    active: local
   cloud:
     openfeign:
       client:
@@ -21,24 +29,3 @@ management:
       exposure:
         exclude: health, info, beans, conditions
         include: threaddump, heapdump
----
-spring:
-  profiles:
-    active: local
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/foresty
-    username: root
-    password: 1234
-  exposed:
-    generate-ddl: true
-    show-sql: true
-base.url: "http://localhost:8111"
----
-spring:
-  profiles:
-    active: dev
----
-spring:
-  profiles:
-    active: prod

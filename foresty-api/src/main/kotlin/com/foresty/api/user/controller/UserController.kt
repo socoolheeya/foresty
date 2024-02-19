@@ -1,7 +1,7 @@
 package com.foresty.api.user.controller
 
 import com.foresty.api.user.service.UserService
-import com.foresty.domain.entities.user.domain.User
+import com.foresty.domain.exposed.model.user.domain.User
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class UserController(private val userService: UserService) {
+    @GetMapping("/users/jpa")
+    suspend fun findAllJpa(): List<User> = userService.getUserAllForJpa()
 
     @GetMapping("/users")
     suspend fun findAll(): List<User>? {

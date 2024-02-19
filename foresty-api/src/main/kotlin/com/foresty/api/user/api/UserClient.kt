@@ -1,6 +1,6 @@
 package com.foresty.api.user.api
 
-import com.foresty.domain.entities.user.dao.UserDao
+import com.foresty.domain.exposed.model.user.dao.UserDao
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.DeleteMapping

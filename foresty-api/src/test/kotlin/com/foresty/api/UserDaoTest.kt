@@ -1,10 +1,13 @@
 package com.foresty.api
 
-import com.foresty.domain.entities.user.dao.UserDao
+import com.foresty.api.commons.utils.DateUtils
+import com.foresty.domain.exposed.model.user.dao.UserDao
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.Database
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.TestConstructor
@@ -17,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional
 open class ExposedTestSupport
 
 class UserDaoTest: ExposedTestSupport() {
+
+    val log: Logger = LoggerFactory.getLogger(UserDaoTest::class.java)
 
     private fun getDataSource():HikariDataSource {
         val config  = HikariConfig().apply {
@@ -41,8 +46,31 @@ class UserDaoTest: ExposedTestSupport() {
                 println("##users : " + user.toDomain())
             }
 
-        println("---------------------------------------")
+        log.info("---------------------------------------")
         println(users)
+    }
+
+    @Test
+    fun createTest() {
+        Database.connect(getDataSource())
+        val newUser = UserDao.new {
+            name = "hong"
+            password = "1234"
+            email = "hello.exposed@gmail.com"
+            createdBy = "exposed tester"
+            createdDate = DateUtils.javaNow()
+            updatedBy = "exposed tester"
+            updatedDate = DateUtils.javaNow()
+        }
+
+        log.info("new User : {}", newUser.toDomain())
+        //val userDao = UserDao.findById(1608);
+    }
+
+    @Test
+    fun updateTest() {
+        Database.connect(getDataSource())
+        val userDao = UserDao.findById(1611);
     }
 
     @Test
@@ -52,11 +80,8 @@ class UserDaoTest: ExposedTestSupport() {
         val userDao = UserDao.findById(1602);
         val user = userDao?.toDomain()
 
-        println("---------------------------------------")
         println(user)
 
         userDao?.delete()
     }
-
-
 }
