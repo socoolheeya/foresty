@@ -6,6 +6,10 @@ server:
     max-connections: 8192
     accept-count: 100
     connection-timeout: 20000
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
 spring:
   profiles:
     active: local
@@ -17,6 +21,9 @@ spring:
             connect-timeout: 5000
             read-timeout: 5000
             logger-level: basic
+  output:
+    ansi:
+      enabled: always
 logging:
   level:
     root: info
