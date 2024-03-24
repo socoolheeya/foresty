@@ -96,6 +96,7 @@ project("foresty-api") {
 
 project("foresty-domain") {
     val exposedVersion: String by project
+    val querydslVersion: String by project
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
         implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
@@ -110,12 +111,16 @@ project("foresty-domain") {
         implementation("org.jetbrains.exposed:exposed-json:$exposedVersion")
         implementation("org.jetbrains.exposed:exposed-money:$exposedVersion")
         implementation("org.jetbrains.exposed:exposed-spring-boot-starter:$exposedVersion")
+
+        // querydsl
+        implementation("com.querydsl:querydsl-jpa:$querydslVersion:jakarta")
+        annotationProcessor("com.querydsl:querydsl-apt:$querydslVersion:jakarta")
+        annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+        annotationProcessor("jakarta.persistence:jakarta.persistence-api")
         annotationProcessor("org.projectlombok:lombok")
         runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
         //runtimeOnly("org.mariadb:r2dbc-mariadb")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
-
-
     }
     allOpen {
         annotation("jakarta.persistence.Entity")
@@ -129,17 +134,11 @@ project("foresty-domain") {
         annotation("jakarta.persistence.Embeddable")
     }
 
-
     val bootJar: BootJar by tasks
     val jar: Jar by tasks
 
     bootJar.enabled = false
     jar.enabled = true
-
-//    val generated = "src/main/generated"
-//    tasks.withType<JavaCompile>().configureEach {
-//        options.generatedSourceOutputDirectory.set(file(generated))
-//    }
 }
 
 tasks.wrapper {
