@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-    <conversionRule conversionWord="myHighlight" converterClass="com.foresty.api.commons.converters.CustomHighlightConverter" />
+    <conversionRule conversionWord="myHighlight" converterClass="com.foresty.api.commons.converters.LogbackLevelConverter" />
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logFile.log</file>
@@ -18,7 +18,7 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <charset>UTF-8</charset>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %myHighlight(%-5level) \(${PID:- }\)[%t] %cyan([%logger{30}:%line]) %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %myHighlight(%-5level) %magenta(\(${PID:- }\)) [%t] %cyan([%logger{30}:%line]) %msg%n</pattern>
         </encoder>
     </appender>
 
