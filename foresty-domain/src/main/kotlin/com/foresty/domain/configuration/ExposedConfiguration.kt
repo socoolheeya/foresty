@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration
     value = [ExposedAutoConfiguration::class],
     exclude = [DataSourceTransactionManagerAutoConfiguration::class]
 )
-class DatabaseConfiguration {
+class ExposedConfiguration {
 
     @Bean
     fun databaseConfig() = DatabaseConfig {
