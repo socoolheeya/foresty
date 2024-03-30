@@ -1,6 +1,5 @@
 package com.foresty.domain.jpa.model.note
 
-import com.foresty.domain.exposed.model.note.domain.Content
 import jakarta.persistence.Column
 import jakarta.persistence.ConstraintMode
 import jakarta.persistence.Entity
@@ -38,13 +37,4 @@ class ContentEntity(
     @OneToMany(mappedBy = "content")
     val categories: List<CategoryEntity>
 ) {
-    companion object {
-        fun toDomain(entity: ContentEntity): Content {
-            return Content(
-                nose = entity.nose,
-                taste = entity.taste,
-                finish = entity.finish
-            )
-        }
-    }
 }

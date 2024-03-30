@@ -2,7 +2,6 @@ package com.foresty.domain.jpa.model.note
 
 import com.foresty.domain.common.entity.BaseEntity
 import com.foresty.domain.enums.NoteEnum
-import com.foresty.domain.exposed.model.note.domain.Note
 import com.foresty.domain.jpa.model.user.UserEntity
 import jakarta.persistence.Column
 import jakarta.persistence.ConstraintMode
@@ -38,13 +37,5 @@ class NoteEntity(
     @OneToMany(mappedBy = "note")
     val contents: List<ContentEntity>
 ): BaseEntity() {
-    companion object {
-        fun toDomain(entity: NoteEntity): Note {
-            return Note(
-                entity.id,
-                entity.title,
-                entity.star
-            )
-        }
-    }
+
 }

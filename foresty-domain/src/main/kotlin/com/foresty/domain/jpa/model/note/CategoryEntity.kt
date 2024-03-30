@@ -1,6 +1,6 @@
 package com.foresty.domain.jpa.model.note
 
-import com.foresty.domain.exposed.model.note.domain.Category
+
 import jakarta.persistence.Column
 import jakarta.persistence.ConstraintMode
 import jakarta.persistence.Entity
@@ -20,18 +20,12 @@ class CategoryEntity(
     @Column(name = "categoryId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
+
     @Column
     val name: String,
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contentId", foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT))
     val content: ContentEntity
 ) {
-    companion object {
-        fun toDomain(entity: CategoryEntity): Category {
-            return Category(
-                entity.id,
-                entity.name
-            )
-        }
-    }
 }
