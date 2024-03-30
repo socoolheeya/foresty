@@ -52,7 +52,6 @@ subprojects {
         annotationProcessor("org.projectlombok:lombok")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("io.projectreactor:reactor-test")
-        testImplementation("com.ninja-squad:springmockk")
     }
 
     dependencyManagement {
@@ -139,6 +138,15 @@ project("foresty-domain") {
 
     bootJar.enabled = false
     jar.enabled = true
+    val querydslSrcDir: String = "src/main/generated"
+
+    tasks.clean {
+        delete(file(querydslSrcDir))
+    }
+
+    tasks.withType<JavaCompile> {
+        options.generatedSourceOutputDirectory = file(querydslSrcDir)
+    }
 }
 
 tasks.wrapper {
